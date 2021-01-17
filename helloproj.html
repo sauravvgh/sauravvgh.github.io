@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>self portfolio</title>
+   <style>
+       .main{
+           text-align: center;
+       }
+   </style>
+</head>
+<body>
+    
+    <div id="loading">loading.....</div>
+    <div class="main" id="mainContainer" hidden>
+        <img 
+        height="100"
+        width="100"
+        id="profileImage"
+     >
+     <h2 id= "fullname"></h2>
+     <p id="bio"></p>
+     <h5 id="follower info"></h5>
+     <p>
+         check me on <a id="githubLink">github</a>
+         <a class="twitter-timeline" data-lang="en" data-width="300" data-height="400" href="https://twitter.com/sauravg51848160?ref_src=twsrc%5Etfw">Tweets by sauravg51848160</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>   
+        </p>
+        <script>
+            fetch("https://api.github.com/users/sauravvgh").then(response=>response.json()).then(function(data){
+                console.log(data);
+                
+                let followersCount = data['followers']
+                let followersInfo = `I have ${followersCount} awesome people on github`
+                document.getElementById('profileImage').src=data['avatar_url']
+                document.getElementById('fullname').textContent=data['name']
+                document.getElementById('bio').textContent=data['bio']
+                document.getElementById('follower info').textContent= followersInfo
+                document.getElementById('githubLink').href=data['html_url']
+                document.getElementById('mainContainer').hidden = false
+            })
+            
+        </script>
+    </div>
+    
+</body>
+</html>
